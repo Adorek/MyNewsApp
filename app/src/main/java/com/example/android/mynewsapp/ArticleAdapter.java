@@ -23,7 +23,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
     }
 
     // View holder for quick access to views
-    static class ViewHolder {
+    static private class ViewHolder {
         TextView titleTextView;
         TextView trailTextView;
         TextView sectionTextView;
@@ -84,6 +84,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
      * @return a string in specified format from given date
      */
     private String getDateString(Date date) {
-        return DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.getDefault()).format(date);
+        return DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT,
+                Locale.getDefault()).format(date);
     }
 }

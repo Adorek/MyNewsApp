@@ -40,7 +40,7 @@ public class NewsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
-        mProgressBar = (ProgressBar) findViewById(R.id.loading);
+        mProgressBar = (ProgressBar) findViewById(R.id.loading_progress_bar);
 
         // Find a reference to the {@link ListView} in the layout
         ListView articlesListView = (ListView) findViewById(R.id.news_list);
@@ -48,7 +48,7 @@ public class NewsActivity extends AppCompatActivity
         // Create a new adapter that takes an empty list of articles as input
         mArticleAdapter = new ArticleAdapter(this, new ArrayList<Article>());
 
-        mEmptyStateTextView = (TextView) findViewById(R.id.empty);
+        mEmptyStateTextView = (TextView) findViewById(R.id.empty_text_view);
         articlesListView.setEmptyView(mEmptyStateTextView);
 
         // Set the adapter on the {@link ListView}
@@ -63,9 +63,9 @@ public class NewsActivity extends AppCompatActivity
                 // Find the current article that was clicked on
                 Article currentArticle = mArticleAdapter.getItem(position);
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri earthquakeUri = Uri.parse(currentArticle.getmUrl());
+                Uri articleUri = Uri.parse(currentArticle.getmUrl());
                 // Create a new intent to view the earthquake URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, articleUri);
                 // Send the intent to launch a new activity
                 startActivity(websiteIntent);
             }

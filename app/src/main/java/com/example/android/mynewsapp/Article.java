@@ -13,7 +13,8 @@ public class Article {
     private Bitmap mThumbnail;
     private String mUrl;
 
-    public Article(String mTitle, Date mPublished, String mSection, String mAuthor, String mTrail, Bitmap mThumbnail, String mUrl) {
+    public Article(String mTitle, Date mPublished, String mSection, String mAuthor, String mTrail,
+                   Bitmap mThumbnail, String mUrl) {
         this.mTitle = mTitle;
         this.mPublished = mPublished;
         this.mSection = mSection;
