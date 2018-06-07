@@ -1,5 +1,6 @@
 package com.example.android.mynewsapp;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
@@ -122,6 +123,7 @@ public final class QueryUtils {
      * parsing the given JSON response.
      */
     private static List<Article> extractArticlesFromJson(String jsonResponse) {
+
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(jsonResponse)) {
             return null;
@@ -137,17 +139,21 @@ public final class QueryUtils {
             for (int i = 0; i < responseArray.length(); i++) {
                 JSONObject article = responseArray.getJSONObject(i);
                 String section = article.getString("sectionName");
+                String published = article.getString("webPublicationDate");
+
                 JSONObject fields = article.getJSONObject("fields");
                 String author = fields.getString("byline");
                 String title = fields.getString("headline");
                 String trail = fields.getString("trailText");
-                String published = fields.getString("firstPublicationDate");
                 String url = fields.getString("shortUrl");
+
                 Bitmap thumbnail = null;
+
                 try {
                     thumbnail = getThumbnail(fields.getString("thumbnail"));
                 } catch (IOException exception) {
                     Log.e(LOG_TAG, "Error getting thumbnail", exception);
+
                 }
                 articles.add(new Article(title, getDateFromString(published), section, author, trail, thumbnail, url));
             }

@@ -26,6 +26,8 @@ import java.util.List;
 public class NewsActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<Article>> {
 
+    private static final String LOG_TAG = NewsActivity.class.getName();
+
     /** URL for articles data from the Guardian API */
     private static final String NEWS_URL =
             "http://content.guardianapis.com/search";
@@ -149,12 +151,14 @@ public class NewsActivity extends AppCompatActivity
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         // Append query parameter and its value. For example, the `order-by=newest`
+        uriBuilder.appendQueryParameter("q", "politics");
         uriBuilder.appendQueryParameter("order-by", orderBy);
         uriBuilder.appendQueryParameter("page-size", minArticlesNumber);
         uriBuilder.appendQueryParameter("show-fields", fields);
         uriBuilder.appendQueryParameter("api-key", "test");
 
         // Return the completed uri `http://content.guardianapis.com/search?order-by=newest&page-size=25&show-fields=headline,trailText,firstPublicationDate,shortUrl,thumbnail,byline&api-key=test'
+        Log.d(LOG_TAG, "uriBuilder: " + uriBuilder.toString());
         return new ArticleLoader(this, uriBuilder.toString());
     }
 
